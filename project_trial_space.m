@@ -1,40 +1,17 @@
-m=size(mhcovid1,1);
-N=112374333;
+m=size(mhcovid,1);
+n=112374333;    %2011 census
 
-a=0; %rate of infection
-b=0; %rate of removal
-
-S=ones(m,1);
-S(1)=N; %2011 census
-
-I=mhcovid1(:,3);
-rcvr=mhcovid1(:,1);
-dead=mhcovid1(:,2);
+diag=mhcovid(:,3);
+rcvr=mhcovid(:,1);
+dead=mhcovid(:,2);
 R=rcvr+dead;
+I=diag-R;
+S=n*ones(m,1)-diag;
 
-for i=2:m
-    S(i)=S(i-1)-I(i)-R(i);
-end
+alpha=10^-29;
+N=10^6;
 
-plot(1:m,I,'xr');
-hold on;
-plot(1:m,rcvr,'xb');
-hold on;
-plot(1:m,dead,'xk');
-hold on;
+[lambda1,mu1,J1]=deterministic(S,I,alpha,N);
 
-for i=1:m-1
-    a=a+(S(i)-S(i+1))/(S(i)*I(i));
-    b=b+(R(i+1)-R(i))/I(i);
-end
-
-a=a/m;
-b=b/m;
-
-S1=zeros(m,1);
-I1=ones(m,1);
-R1=zeros(m,1);
-S1(1)=N;
-for i=1:m-1
-    
-end
+%viewI(lambda1,mu1,S,I);
+viewR(mu1,I,R);
