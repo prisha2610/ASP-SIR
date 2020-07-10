@@ -14,7 +14,8 @@ r = R0/N;
 cond=[s i r];
 [t,y]=ode45('sir_func', [0,365], cond);
 
-plot(t,y, 'Linewidth', 2);
+plot(t,y*N, 'Linewidth', 2);
 xlim([0, 365]);
 xticks(0:20:365);
+ylim([0,N]);
 legend('S','I','R', 'Location','best');
