@@ -19,3 +19,5 @@ xlim([0, 365]);
 xticks(0:20:365);
 ylim([0,N]);
 legend('S','I','R', 'Location','best');
+xlabel('Time')
+ylabel('Population')
