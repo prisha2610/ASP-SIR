@@ -1,33 +1,47 @@
-load('data.mat','N','beta','gamma');
-steps=1000;
+clear
+load('data.mat','N','i','days','beta','gamma');
 
-t(1)=1;
-S(1)=N-1;
-I(1)=1;
-i=1;
+t=0;    %initial time
+S=N-i;   %initial susceptible population 
+I=i; %initial susceptible population
 
-while(t(i)<=steps)
-    u=rand(2,1);
-    lambda=beta*S(i)*I(i)/N+gamma*I(i);
-    t(i+1)=-log(u(1))/lambda;
-    if u(2)<=beta*S(i)*I(i)/N 
-        if S(i)~=0
-            S(i+1)=S(i)-1;
-            I(i+1)=I(i)+1;
+while(t(end)<days)  %time for occurence of event can't exceed total time
+    u=rand(2,1);    %vector of random numbers to simulate intervent time and event occurence
+    lambda=(beta*S(end)*I(end))/N+gamma*I(end); %total rate of either event occurring
+    t =[t, t(end)-log(u(1))/lambda];    %simulation of time at which next event occurs
+    if u(2)<=beta*S(end)*I(end)/(N*lambda)   %condition for transmission to occur
+        if S(end)~=0
+            S=[S, S(end)-1];
+            I=[I, I(end)+1];
+        else    %condition for non-negativity of susceptible population
+            S=[S, S(end)];
+            I=[I, I(end)];
         end
-    else
-        I(i+1)=I(i)-1;
+    else    %condition for removal to occur
+        S=[S, S(end)];
+        I=[I, I(end)-1];
     end
-    i=i+1;
-    if I(i)==0
-        t(i)=steps;
+    if I(end)==0    %condition for simulation to stop
+        
+        t=[t, days];
+        S=[S, S(end)];
+        I=[I, 0];
     end
 end
 
 R=N-S-I;
 
-plot(1:steps,S,'-b');
+duration=t(end-1);    %duration of simulated epidemic
+f_distribution=[S(end),I(end),R(end)];  %final distribution of population
+
+plot(t,S,'-b'); %displaying susceptible population curve
 hold on;
-plot(1:steps,I,'-r');
-plot(1:steps,R,'-g');
-hold on;
+plot(t,I,'-r'); %displaying infected population curve
+plot(t,R,'-g'); %displaying removed population curve
+
+title('Gillespie algorithm');
+legend('Susceptible','Infected','Removed');
+axis([0,N,0,days]);
+xlabel('#days');
+ylabel('population');
+hold off;
