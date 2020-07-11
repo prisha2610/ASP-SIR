@@ -2,7 +2,7 @@ T=readtable('date-India-confirmed-recovered-dead.csv');
 load('data.mat','N');
 R=T.r+T.d;
 I=T.c-R;
-S=N-I-R;
+S=N-T.c;
 days=height(T);
 save('data.mat','S','I','R','-append');
 
