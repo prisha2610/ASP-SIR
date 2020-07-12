@@ -1,3 +1,12 @@
+% Function for storing the SIR model
+% ------------------------------------
+% The varibles are - 
+% N -- The total population(S+I+R)
+% S -- The number of susceptibles
+% I -- An array of infected people on each day
+% R -- An array of recovered people on each day
+% ------------------------------------
+
 function diffeqs = de_sir(t,vars,params)
 global N
 S = vars(1);
@@ -9,7 +18,7 @@ gamma = params(2);
 %N     = params(3);
 %I0    = params(4);
 
-diffeqs(1,1) = (-1)*beta*S*I;
+diffeqs(1,1) = ((-1)*beta*S*I)/N;
 diffeqs(2,1) = ((beta*S*I)/N) - (gamma*I);
 diffeqs(3,1) = gamma*I;
 
