@@ -16,7 +16,7 @@ function f = optim_fun(params)
      %solve ODE
     try
         warning('off')
-    [tsol,sol] = ode45(@(t,vars) de_sir(t,vars,params), tspan, [S(1),I(1),R(1)]);
+    [tsol,sol] = ode45(@(t,vars) de_sir(t,vars,params), tspan, [S(41),I(41),R(41)]);
         warning('on')
     catch
         f=NaN;
@@ -38,7 +38,7 @@ function f = optim_fun(params)
     infected = infected';      
     
     m = length(infected);
-    sol
+    sol;
     % calculate optimization function
     f1 = norm((infected - sol(:,2))) + norm((susceptible - sol(:,1))); % + norm((recovered - sol(:,3)));
     f =  f1/m;
