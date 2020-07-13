@@ -1,15 +1,18 @@
 %EM simulation
-clear
-load('data.mat','N','i','days','beta','gamma');
+
+global N days beta gamma
+global i x y
+global f1 f2
+
 dt=1;   %unit step
-steps=days*dt;  %time-steps
-S=zeros(steps,1);
-I=zeros(steps,1);
+steps=4*days*dt;  %time-steps
+S=zeros(steps-x,1);
+I=zeros(steps-x,1);
 
 S(1)=N-i;   %initial number of susceptibles
 I(1)=i; %initial number of infectives
 
-for t=1:steps-1
+for t=x:steps-1
     eta=randn(2,1); %vector of two random numbers
     f(1)=beta*S(t)*I(t)*dt/N;   %expected transmitted population in time-step t
     f(2)=gamma*I(t)*dt; %expected removed population in time-step t
@@ -33,13 +36,16 @@ R=N-S-I;    %S+I+R=N at any time-step
 duration=t+1;    %duration of simulated epidemic
 f_distribution=[S(end),I(end),R(end)];  %final distribution of population
 
-title('EM method');
-plot(1:steps,S,'-b');   %displaying number of susceptible individuals
+id=find(t<=y);
+figure(f1);
+plot(t(id),var(id,2),'-r','DisplayName','EM Method');
+
+f4=f2;
+plot(t,S,'-b'); %displaying susceptible population curve
 hold on;
-plot(1:steps,I,'-r');   %displaying number of infected individuals
-plot(1:steps,R,'-g');   %displaying number of removed individuals
+plot(t,I,'-r'); %displaying infected population curve
+plot(t,R,'-g'); %displaying removed population curve
+title('EM method + ODE');
 legend('Susceptible','Infected','Removed');
-axis([0,N,0,days]);
-xlabel('#days');
-hold off;
-ylabel('population');
+xlabel('#Days');
+ylabel('Population');

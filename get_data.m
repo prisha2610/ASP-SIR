@@ -1,37 +1,54 @@
+% Script for setting up the data
+% ------------------------------------
+% The variables used are -
+% S -- Susceptible population
+% I -- Infected population
+% R -- Removed population
+% N -- Total population
+% days -- Total number of days for which data is available
+% phase -- Time period studied
+% x -- Start index of time period
+% y -- End index of time period
+% i -- Initial number of infectives
+% f1 -- Figure for showing actual data
+% ------------------------------------
+
+global S I R
+global N days phase x y i
+global f1
+
 T=readtable('date-India-confirmed-recovered-dead.csv');
 N=136641750;
 
-R_all=T.r+T.d;
-I_all=T.c-T.r-T.d;
-S_all=N-T.c;
+R=T.r+T.d;
+I=T.c-T.r-T.d;
+S=N-T.c;
 days=height(T);
 
-
-phase=input('1. Pre-Nationwide Lockdown\n2. Lockdown Period\n3. Post-Nationwide Lockdown\n');
+phase=input('0. Uptil now\n1. Pre-Nationwide Lockdown\n2. Lockdown Period\n3. Post-Nationwide Lockdown\n');
 switch phase
     case 1
-        S=S_all(41:63);
-        I=I_all(41:63);
-        R=R_all(41:63);
+        x=41;
+        y=63;
+        i=I(41);
     case 2
-        S=S_all(64:131);
-        I=I_all(64:131);
-        R=R_all(64:131);
+        x=64;
+        y=131;
+        i=I(64);
     case 3
-        S=S_all(132:end);
-        I=I_all(132:end);
-        R=R_all(132:end);
+        x=132;
+        y=days;
+        i=I(132);
+    case 0
+        x=41;
+        y=days;
+        i=I(41);
 end
 
-save('data.mat','N','days','S','I','R','phase','S_all','I_all','R_all');
-
-title('Actual');
-%plot(1:days,S,'-b');    %displaying susceptible population curve
+f1=figure;
+plot(x:y,I(x:y),'-k');
 hold on;
-plot(1:days,I_all,'-r');    %displaying infected population curve
-plot(1:days,R_all,'-g');   %displaying removed population curve
-legend('Infected','Removed');
-%axis([0,days,0,max(]);
-xlabel('#days');
-ylabel('population');
-hold off;
+legend('Actual');
+title('Actual data + Models');
+xlabel('#Days');
+ylabel('Infected population');
