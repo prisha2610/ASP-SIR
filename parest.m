@@ -6,7 +6,7 @@
 % options -- Setting attributes for fminsearch
 % b -- Values of the parameters with minimum loss
 % fminval -- Minimum value of error found
-% flag -- Status of fminsearch:
+% f -- Status of fminsearch:
 %         1 if minimum is reached, 0 if minimum not reached, -1 if error function not convergent 
 % ------------------------------------
 % The functions used are-
@@ -15,7 +15,9 @@
 % optim_fun -- The function to optimize
 % ------------------------------------
 
-function [beta,gamma] = parest()
+function [f,fminval] = parest()
+    
+    global beta gamma
     
     b0 = iniGuess();
     
@@ -23,9 +25,8 @@ function [beta,gamma] = parest()
     
     options = optimset('Display','off','MaxIter',maxiters,...
                 'MaxFunEvals',maxiters,'TolFun',1e-6,'TolX',1e-6,'PlotFcn',@optimplotfval);
-    xlabel('Error');
     
-    [b, fminval,flag] = fminsearch(@optim_fun, b0, options);
+    [b, fminval,f] = fminsearch(@optim_fun, b0, options);
     warning('on')
     
     beta=b(1);

@@ -52,7 +52,7 @@ function []=EM_method()
     end
     R=N-S-I;                        %S+I+R=N at any time-step
     
-    if days~=375
+    if days~=200
         figure(f1);
         plot(x:y-1,I(1:y-x),'-m','DisplayName','EM Method');
     end

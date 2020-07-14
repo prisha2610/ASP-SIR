@@ -44,16 +44,15 @@ function [] = gillespie()
 
     figure(f1);
 
-    if x==1 && y==1500
-        plot(t,S,'-b');
+    if x==1 && y==800
+        plot(t,S,'-b','DisplayName','Gillespie S');
         hold on;
-        plot(t,I,'-r');
-        plot(t,N-S-I,'-g');
-        legend('Susceptible','Infected','Removed');
+        plot(t,I,'-r','DisplayName','Gillespie I');
+        plot(t,N-S-I,'-g','DisplayName','Gillespie R');
         xlabel('#Days');
         ylabel('Population');
     else
-        plot(t,I,'-r','DisplayName','Gillespie Algo');
+        plot(t,I,'-y','DisplayName','Gillespie Algo');
     end
 
 end

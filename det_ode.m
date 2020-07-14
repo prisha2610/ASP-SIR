@@ -26,7 +26,7 @@ function [f_spread]=det_ode()
 
     f_spread=N-var(end,1)-var(end,2);
     
-    if x==1 && y==1500
+    if x==1 && y==800
         f1=figure;
         plot(t,var(:,1),'--b');
         hold on;

@@ -12,14 +12,16 @@
 % flag -- Epidemic status according to Deterministic Theorem
 % p -- Probability of a major outbreak
 % f_spread -- Total cases according to simulation
+% f -- Optimization status
+% fminval -- Optimization function value
 % f1 -- Figure for showing actual data + ODE
 % f2 -- Figure for showing ODE over longer period of time
 % f3 -- Figure for showing EM-plot over longer period of time
 % ------------------------------------
 % The functions used are -
 % det_ode -- ODE plot
-% isEpidemic --
-% P_majOutBr --
+% isEpidemic -- Epidemic status according to Deterministic Theorem
+% P_majOutBr -- Probability of a major outbreak
 % EM_method -- EM Method simulation
 % gillespie -- Gillespie Algorithm simulation
 % get_data -- Setting up actual data
@@ -33,27 +35,27 @@ global I N date
 global f1 f2 f3
 
 close all
-beta=0.1;
-gamma=0.08;
+beta=0.08;
+gamma=0.03;
 N=1000;
-i=5;
+i=10;
 x=1;
-days=375;
+days=200;
 y=days*4;
 f_spread=det_ode;
 flag=isEpidemic;
 p=P_majOutBr;
 disp("Theoretical");
-disp("N="+N+"    Initial Infectives="+i);
-disp("Start Date:"+x+"    End Date:"+y)
-disp("Transmission Rate(Beta)="+beta+"    Removal Rate(Gamma)="+gamma)
-disp("Probabilty of major outbreak="+p);
+disp("Total Population="+N+"    Initial Infectives="+i...
+    +"    Basic Reproduction Number="+(beta/gamma));
+disp("Start Date:"+x+"    End Date:"+y+...
+    "    Transmission Rate(Beta)="+beta+"    Removal Rate(Gamma)="+gamma)
+disp("Probabilty of major outbreak="+p+"    Total simulated number of cases="+f_spread);
 if flag
     disp("Deterministic Status: Epidemic");
 else
     disp("Deterministic Status: Disease-free equilibrium");
 end
-disp("Total simulated number of cases="+f_spread);
 disp(" ");
 EM_method;
 gillespie;
@@ -70,19 +72,22 @@ x=43;
 y=64;
 i=I(x);
 view_data;
-[beta,gamma]=parest;
-det_ode;
-disp("COVID-19 in India - Phase 1 Analysis")
-disp("Total population="+N+"    Initial Infectives="+i);
+[f,fminval]=parest;
+f_spread=det_ode;
+flag=isEpidemic;
+p=P_majOutBr;
+disp("COVID-19 in India - Phase 1 Analysis - Pre-Lockdown")
+disp("Total population="+N+"    Initial Infectives="+i...
+    +"    Basic Reproduction Number="+(beta/gamma));
 disp("Start Date:"+date(x)+"    End Date:"+date(y)+...
     "    Transmission Rate(Beta)="+beta+"    Removal Rate(Gamma)="+gamma);
-disp("Probabilty of major outbreak="+p);
+disp("Optimization status="+f+"    Optimized error function="+fminval);
+disp("Probabilty of major outbreak="+p+"    Total simulated number of cases="+f_spread);
 if flag
     disp("Deterministic Status: Epidemic");
 else
     disp("Deterministic Status: Disease-free equilibrium");
 end
-disp("Total simulated number of cases="+f_spread);
 disp(" ");
 gillespie;
 EM_method;
@@ -95,19 +100,22 @@ x=64;
 y=131;
 i=I(x);
 view_data;
-[beta,gamma]=parest;
-det_ode;
-disp("COVID-19 in India - Phase 2 Analysis")
-disp("Total population="+N+"    Initial Infectives="+i);
+[f,fminval]=parest;
+f_spread=det_ode;
+flag=isEpidemic;
+p=P_majOutBr;
+disp("COVID-19 in India - Phase 2 Analysis - Lockdown")
+disp("Total population="+N+"    Initial Infectives="+i...
+    +"    Basic Reproduction Number="+(beta/gamma));
 disp("Start Date:"+date(x)+"    End Date:"+date(y)+...
     "    Transmission Rate(Beta)="+beta+"    Removal Rate(Gamma)="+gamma);
-disp("Probabilty of major outbreak="+p);
+disp("Optimization status="+f+"    Optimized error function="+fminval);
+disp("Probabilty of major outbreak="+p+"    Total simulated number of cases="+f_spread);
 if flag
     disp("Deterministic Status: Epidemic");
 else
     disp("Deterministic Status: Disease-free equilibrium");
 end
-disp("Total simulated number of cases="+f_spread);
 disp(" ");
 %gillespie;
 EM_method;
@@ -120,19 +128,22 @@ x=131;
 y=days;
 i=I(x);
 view_data;
-[beta,gamma]=parest;
-det_ode;
-disp("COVID-19 in India - Phase 3 Analysis")
-disp("Total population="+N+"    Initial Infectives="+i);
+[f,fminval]=parest;
+f_spread=det_ode;
+flag=isEpidemic;
+p=P_majOutBr;
+disp("COVID-19 in India - Phase 3 Analysis - Post-Lockdown")
+disp("Total population="+N+"    Initial Infectives="+i...
+    +"    Basic Reproduction Number="+(beta/gamma));
 disp("Start Date:"+date(x)+"    End Date:"+date(y)+...
     "    Transmission Rate(Beta)="+beta+"    Removal Rate(Gamma)="+gamma);
-disp("Probabilty of major outbreak="+p);
+disp("Optimization status="+f+"    Optimized error function="+fminval);
+disp("Probabilty of major outbreak="+p+"    Total simulated number of cases="+f_spread);
 if flag
     disp("Deterministic Status: Epidemic");
 else
     disp("Deterministic Status: Disease-free equilibrium");
 end
-disp("Total simulated number of cases="+f_spread);
 disp(" ");
 %gillespie;
 EM_method;
@@ -145,19 +156,22 @@ x=43;
 y=days;
 i=I(x);
 view_data;
-[beta,gamma]=parest;
-det_ode;
+[f,fminval]=parest;
+f_spread=det_ode;
+flag=isEpidemic;
+p=P_majOutBr;
 disp("COVID-19 in India - Overall Analysis");
-disp("Total population="+N+"    Initial Infectives="+i);
+disp("Total population="+N+"    Initial Infectives="+i...
+    +"    Basic Reproduction Number="+(beta/gamma));
 disp("Start Date:"+date(x)+"    End Date:"+date(y)+...
     "    Transmission Rate(Beta)="+beta+"    Removal Rate(Gamma)="+gamma);
-disp("Probabilty of major outbreak="+p);
+disp("Optimization status="+f+"    Optimized error function="+fminval);
+disp("Probabilty of major outbreak="+p+"    Total simulated number of cases="+f_spread);
 if flag
     disp("Deterministic Status: Epidemic");
 else
     disp("Deterministic Status: Disease-free equilibrium");
 end
-disp("Total simulated number of cases="+f_spread);
 %gillespie;
 EM_method;
 saveas(f1,'Estimation_overall.png');
