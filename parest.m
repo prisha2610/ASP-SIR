@@ -10,7 +10,7 @@
 %         1 if minimum is reached, 0 if minimum not reached, -1 if error function not convergent 
 % ------------------------------------
 % The functions used are-
-% iniGuess -- Function for inital guess of parameters
+% iniGuess -- Function for initial guess of parameters
 % fminsearch -- An optimizer provided by MATLAB for minimizing the value of optim_fun
 % optim_fun -- The function to optimize
 % ------------------------------------

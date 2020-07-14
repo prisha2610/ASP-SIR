@@ -4,7 +4,7 @@
 % t -- Time-steps
 % s -- Susceptible individuals at particular time step
 % I -- Infected individuals at each time step
-% u -- Vector of 2 uniformly random numbers to simulate intervent time and event occurence
+% u -- Vector of 2 uniformly random numbers to simulate intervent time and event occurrence
 % lambda -- total rate of either event occurring
 % ------------------------------------
 % The functions used are -

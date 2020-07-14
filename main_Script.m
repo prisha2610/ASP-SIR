@@ -26,7 +26,7 @@
 % gillespie -- Gillespie Algorithm simulation
 % get_data -- Setting up actual data
 % view_data -- Plotting actual data
-% parest -- Estimatation of beta and gamma
+% parest -- Estimation of beta and gamma
 % ------------------------------------
 
 global days beta gamma
@@ -50,7 +50,7 @@ disp("Total Population="+N+"    Initial Infectives="+i...
     +"    Basic Reproduction Number="+(beta/gamma));
 disp("Start Date:"+x+"    End Date:"+y+...
     "    Transmission Rate(Beta)="+beta+"    Removal Rate(Gamma)="+gamma)
-disp("Probabilty of major outbreak="+p+"    Total simulated number of cases="+f_spread);
+disp("Probability of major outbreak="+p+"    Total simulated number of cases="+f_spread);
 if flag
     disp("Deterministic Status: Epidemic");
 else
@@ -82,7 +82,7 @@ disp("Total population="+N+"    Initial Infectives="+i...
 disp("Start Date:"+date(x)+"    End Date:"+date(y)+...
     "    Transmission Rate(Beta)="+beta+"    Removal Rate(Gamma)="+gamma);
 disp("Optimization status="+f+"    Optimized error function="+fminval);
-disp("Probabilty of major outbreak="+p+"    Total simulated number of cases="+f_spread);
+disp("Probability of major outbreak="+p+"    Total simulated number of cases="+f_spread);
 if flag
     disp("Deterministic Status: Epidemic");
 else
@@ -110,7 +110,7 @@ disp("Total population="+N+"    Initial Infectives="+i...
 disp("Start Date:"+date(x)+"    End Date:"+date(y)+...
     "    Transmission Rate(Beta)="+beta+"    Removal Rate(Gamma)="+gamma);
 disp("Optimization status="+f+"    Optimized error function="+fminval);
-disp("Probabilty of major outbreak="+p+"    Total simulated number of cases="+f_spread);
+disp("Probability of major outbreak="+p+"    Total simulated number of cases="+f_spread);
 if flag
     disp("Deterministic Status: Epidemic");
 else
@@ -138,7 +138,7 @@ disp("Total population="+N+"    Initial Infectives="+i...
 disp("Start Date:"+date(x)+"    End Date:"+date(y)+...
     "    Transmission Rate(Beta)="+beta+"    Removal Rate(Gamma)="+gamma);
 disp("Optimization status="+f+"    Optimized error function="+fminval);
-disp("Probabilty of major outbreak="+p+"    Total simulated number of cases="+f_spread);
+disp("Probability of major outbreak="+p+"    Total simulated number of cases="+f_spread);
 if flag
     disp("Deterministic Status: Epidemic");
 else
@@ -166,7 +166,7 @@ disp("Total population="+N+"    Initial Infectives="+i...
 disp("Start Date:"+date(x)+"    End Date:"+date(y)+...
     "    Transmission Rate(Beta)="+beta+"    Removal Rate(Gamma)="+gamma);
 disp("Optimization status="+f+"    Optimized error function="+fminval);
-disp("Probabilty of major outbreak="+p+"    Total simulated number of cases="+f_spread);
+disp("Probability of major outbreak="+p+"    Total simulated number of cases="+f_spread);
 if flag
     disp("Deterministic Status: Epidemic");
 else

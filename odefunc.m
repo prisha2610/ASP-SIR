@@ -1,6 +1,6 @@
 % Setting the SIR model
 % ------------------------------------
-% The varibles used are - 
+% The variables used are - 
 % t -- Time-steps
 % y -- [S;I]
 % dy -- [dS;dI]
